@@ -4,6 +4,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { H1, H2, SubmitButton } from 'C/common';
 
 import { Input } from 'C/first';
+import { Label } from 'C/second';
+import { useState } from 'react';
 
 type FirstFieldValues = {
   name: string;
@@ -12,6 +14,12 @@ type FirstFieldValues = {
 
 const Home: NextPage = () => {
   const { handleSubmit, control } = useForm<FirstFieldValues>();
+
+  const [junk] = useState({
+    drink: 'コカ・コーラ',
+    food: 'ハンバーガー',
+    price: 300,
+  });
 
   const firstSubmitHandler: SubmitHandler<FirstFieldValues> = (data) => {
     alert(`名前: ${data.name}\n年齢: ${data.age}`);
@@ -28,6 +36,12 @@ const Home: NextPage = () => {
         <Input control={control} name='age' label='年齢' />
         <SubmitButton label='送信' />
       </form>
+
+      <hr />
+
+      <div>
+        <Label label='飲み物' values={junk} keyStr='drink' />
+      </div>
     </main>
   );
 };
